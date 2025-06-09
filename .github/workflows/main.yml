@@ -1,4 +1,4 @@
-name: Kittyfram CI/CD Pipeline
+name: Kittygram CI/CD Pipeline
 
 on:
   push:
