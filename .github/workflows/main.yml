@@ -68,7 +68,7 @@ jobs:
       - name: Build and push to DockerHub
         uses: docker/build-push-action@v4
         with:
-          context: ./kittygram_backend/
+          context: ./backend/
           push: true
           tags: batiskaf24/kittygram_backend:latest
   
@@ -156,7 +156,7 @@ jobs:
         username: ${{ secrets.USER }}
         key: ${{ secrets.SSH_KEY }}
         passphrase: ${{ secrets.SSH_PASSPHRASE }}
-        source: "docker-compose.yml"
+        source: "docker-compose.yml,.env"
         target: "kittygram"
 
     - name: Executing remote ssh commands to deploy
