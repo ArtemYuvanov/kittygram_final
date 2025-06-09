@@ -22,7 +22,6 @@ services:
   frontend:
     image: batiskaf24/kittygram_frontend
     env_file: .env
-    build: ./frontend/
     command: cp -r /app/build/. /static/
     volumes:
       - static:/app/static/
