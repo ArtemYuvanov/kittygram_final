@@ -1,4 +1,4 @@
-name: Kittyfram CI/CD Pipeline
+name: Kittygram CI/CD Pipeline
 
 on:
   push:
@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     services:
       postgres:
-        image: postgres:13
+        image: postgres:13.10
         env:
           POSTGRES_USER: django_user
           POSTGRES_PASSWORD: django_password
@@ -68,7 +68,7 @@ jobs:
       - name: Build and push to DockerHub
         uses: docker/build-push-action@v4
         with:
-          context: ./kittygram_backend/
+          context: ./backend/
           push: true
           tags: batiskaf24/kittygram_backend:latest
   
@@ -135,7 +135,7 @@ jobs:
       - name: Push to DockerHub
         uses: docker/build-push-action@v4
         with:
-          context: ./gateway/
+          context: ./nginx/
           push: true
           tags: batiskaf24/kittygram_gateway:latest
 
@@ -156,8 +156,9 @@ jobs:
         username: ${{ secrets.USER }}
         key: ${{ secrets.SSH_KEY }}
         passphrase: ${{ secrets.SSH_PASSPHRASE }}
-        source: "docker-compose.yml"
+        source: "docker-compose.production.yml"
         target: "kittygram"
+
 
     - name: Executing remote ssh commands to deploy
       uses: appleboy/ssh-action@master
@@ -168,12 +169,12 @@ jobs:
         passphrase: ${{ secrets.SSH_PASSPHRASE }}
         script: |
           cd kittygram
-          sudo docker compose -f docker-compose.yml pull
-          sudo docker compose -f docker-compose.yml down
-          sudo docker compose -f docker-compose.yml up -d
-          sudo docker compose -f docker-compose.yml exec backend python manage.py migrate --noinput
-          sudo docker compose -f docker-compose.yml exec backend python manage.py collectstatic --noinput --clear
-          sudo docker compose -f docker-compose.yml exec backend cp -r /app/collected_static/. /backend_static/static/
+          sudo docker compose -f docker-compose.production.yml pull
+          sudo docker compose -f docker-compose.production.yml down
+          sudo docker compose -f docker-compose.production.yml up -d
+          sudo docker compose -f docker-compose.production.yml exec backend python manage.py migrate
+          sudo docker compose -f docker-compose.production.yml exec backend python manage.py collectstatic --noinput
+          sudo docker compose -f docker-compose.production.yml exec backend cp -r /app/collected_static/. /static/static/
 
   send_message:
     runs-on: ubuntu-latest
