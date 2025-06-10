@@ -3,7 +3,6 @@ from rest_framework.pagination import PageNumberPagination
 
 from .models import Achievement, Cat
 from .serializers import AchievementSerializer, CatSerializer
-from django.http import JsonResponse
 
 
 class CatViewSet(viewsets.ModelViewSet):
