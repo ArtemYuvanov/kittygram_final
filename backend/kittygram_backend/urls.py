@@ -8,13 +8,7 @@ from rest_framework import routers
 router = routers.DefaultRouter()
 router.register(r'cats', CatViewSet)
 router.register(r'achievements', AchievementViewSet)
-from django.urls import path
-from cats.views import debug_host_view  # путь к функции выше
 
-urlpatterns = [
-    # ...
-    path("debug-host/", debug_host_view),
-]
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
