@@ -15,7 +15,7 @@ services:
     image: batiskaf24/kittygram_backend
     env_file: .env
     volumes:
-      - static:/static/
+      - static:/backend_static
       - media:/media/
     depends_on:
       - db
@@ -24,14 +24,14 @@ services:
     env_file: .env
     command: cp -r /app/build/. /static/
     volumes:
-      - static:/static/
+      - static:/frontend_static/
   gateway:
     image: batiskaf24/kittygram_gateway 
     env_file: .env
     ports:
       - 9000:80
     volumes:
-      - static:/static/
+      - static:/staticfiles/
       - media:/media/
     depends_on:
       - backend
