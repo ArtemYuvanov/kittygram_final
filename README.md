@@ -1,6 +1,6 @@
 # 🐾 Kittygram
 
-[![Kittygram Deployment](https://github.com/ArtemYuvanov/kittygram_final/actions/workflows/kittygram_workflow.yml/badge.svg)](https://github.com/ArtemYuvanov/kittygram_final/actions/workflows/kittygram_workflow.yml)
+[![Kittygram CI/CD Pipeline](https://github.com/ArtemYuvanov/kittygram_final/actions/workflows/main.yml/badge.svg)](https://github.com/ArtemYuvanov/kittygram_final/actions/workflows/main.yml)
 
 Kittygram — социальная сеть для размещения фотографий домашних животных.  
 Пользователи могут регистрироваться, загружать фото своих котов, делиться их достижениями и любоваться другими питомцами.
